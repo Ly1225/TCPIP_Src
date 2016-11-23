@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-
+#include <netdb.h>///
 void error_handling(char *message);
 
 int main(int argc, char* argv[])
@@ -15,13 +15,17 @@ int main(int argc, char* argv[])
 	char message[30];
 	int str_len=0;
 	int idx=0, read_len=0;
-	
+	struct hostent *host; ///
 	if(argc!=3){
 		printf("Usage : %s <IP> <port>\n", argv[0]);
 		exit(1);
 	}
-	
-	sock=socket(PF_INET, SOCK_STREAM, 0);
+        if((host=gethostbyname(argv[1]))==NULL) {  ///
+                error_handling("gethostbyname出错！");///  
+                exit(1);  ///
+        }///
+        printf("hostname: %s\n", host->h_name); ///
+	sock=socket(PF_INET, SOCK_STREAM, 0);//TCP socket
 	if(sock == -1)
 		error_handling("socket() error");
 	
