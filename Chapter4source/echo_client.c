@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
 		if(!strcmp(message,"q\n") || !strcmp(message,"Q\n"))
 			break;
 
-		write(sock, message, strlen(message));
-		str_len=read(sock, message, BUF_SIZE-1);
+		write(sock, message, strlen(message));//此两段代码设计有缺陷，将在第五章改进
+		str_len=read(sock, message, BUF_SIZE-1);//
 		message[str_len]=0;
 		printf("Message from server: %s", message);
 	}
