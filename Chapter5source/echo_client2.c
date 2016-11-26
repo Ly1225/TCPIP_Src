@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 		str_len=write(sock, message, strlen(message));
 		
 		recv_len=0;
-		while(recv_len<str_len)
+		while(recv_len<str_len)//此段代码改进回声客户端！！！！
 		{
 			recv_cnt=read(sock, &message[recv_len], BUF_SIZE-1);
 			if(recv_cnt==-1)
